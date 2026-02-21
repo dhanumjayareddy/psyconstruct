@@ -1,0 +1,330 @@
+{
+  "constructs": {
+    "behavioral_activation": {
+      "description": "Reflective model - features are manifestations of underlying latent construct",
+      "measurement_model": "reflective",
+      "aggregation_type": "linear",
+      "features": [
+        {
+          "name": "activity_volume",
+          "weight": 0.25,
+          "aggregation": "mean",
+          "validation_status": "theoretical",
+          "description": "Rolling sum of accelerometer magnitude over 24-hour window"
+        },
+        {
+          "name": "location_diversity",
+          "weight": 0.25,
+          "aggregation": "mean",
+          "validation_status": "theoretical",
+          "description": "Shannon entropy of clustered GPS locations per week"
+        },
+        {
+          "name": "app_usage_breadth",
+          "weight": 0.25,
+          "aggregation": "mean",
+          "validation_status": "experimental",
+          "description": "Entropy of app category usage per day"
+        },
+        {
+          "name": "activity_timing_variance",
+          "weight": 0.25,
+          "aggregation": "mean",
+          "validation_status": "theoretical",
+          "description": "Variance of peak activity hour across 7-14 days"
+        }
+      ]
+    },
+    "avoidance": {
+      "description": "Reflective model - features reflect tendency to avoid social/environmental engagement",
+      "measurement_model": "reflective",
+      "aggregation_type": "linear",
+      "features": [
+        {
+          "name": "home_confinement",
+          "weight": 0.33,
+          "aggregation": "mean",
+          "validation_status": "theoretical",
+          "description": "Percentage of GPS readings within defined home cluster radius"
+        },
+        {
+          "name": "communication_gaps",
+          "weight": 0.33,
+          "aggregation": "mean",
+          "validation_status": "theoretical",
+          "description": "Maximum duration without outgoing communication per day"
+        },
+        {
+          "name": "movement_radius",
+          "weight": 0.34,
+          "aggregation": "directional_inverse",
+          "validation_status": "experimental",
+          "direction": "negative",
+          "description": "Radius of gyration - measure of movement spread"
+        }
+      ]
+    },
+    "social_engagement": {
+      "description": "Formative model - construct is formed by composite of social behaviors",
+      "measurement_model": "formative",
+      "aggregation_type": "linear",
+      "features": [
+        {
+          "name": "communication_frequency",
+          "weight": 0.33,
+          "aggregation": "mean",
+          "validation_status": "literature_supported",
+          "description": "Count of outgoing communications per day"
+        },
+        {
+          "name": "contact_diversity",
+          "weight": 0.33,
+          "aggregation": "mean",
+          "validation_status": "literature_supported",
+          "description": "Unique contacts per rolling 7-day window"
+        },
+        {
+          "name": "initiation_rate",
+          "weight": 0.34,
+          "aggregation": "mean",
+          "validation_status": "theoretical",
+          "description": "Ratio of outgoing to total communications"
+        }
+      ]
+    },
+    "routine_stability": {
+      "description": "Reflective model - features reflect stability of behavioral patterns",
+      "measurement_model": "reflective",
+      "aggregation_type": "linear",
+      "features": [
+        {
+          "name": "sleep_onset_consistency",
+          "weight": 0.25,
+          "aggregation": "directional_reverse",
+          "validation_status": "theoretical",
+          "direction": "positive",
+          "description": "Standard deviation of sleep onset times across days"
+        },
+        {
+          "name": "sleep_duration",
+          "weight": 0.25,
+          "aggregation": "mean",
+          "validation_status": "theoretical",
+          "description": "Average length of inferred sleep interval"
+        },
+        {
+          "name": "activity_fragmentation",
+          "weight": 0.25,
+          "aggregation": "directional_inverse",
+          "validation_status": "experimental",
+          "direction": "negative",
+          "description": "Entropy of hourly activity distribution within a day"
+        },
+        {
+          "name": "circadian_midpoint",
+          "weight": 0.25,
+          "aggregation": "circular_sd",
+          "validation_status": "theoretical",
+          "description": "Midpoint between inferred sleep onset and wake time"
+        }
+      ]
+    }
+  },
+  "feature_metadata": {
+    "activity_volume": {
+      "construct": "behavioral_activation",
+      "data_type": "accelerometer",
+      "temporal_granularity": "daily",
+      "unit": "magnitude_units",
+      "expected_range": [0, null],
+      "missing_data_strategy": "interpolation"
+    },
+    "location_diversity": {
+      "construct": "behavioral_activation",
+      "data_type": "gps",
+      "temporal_granularity": "weekly",
+      "unit": "entropy_bits",
+      "expected_range": [0, "variable"],
+      "range_note": "Maximum depends on number of location clusters",
+      "missing_data_strategy": "threshold_based"
+    },
+    "app_usage_breadth": {
+      "construct": "behavioral_activation",
+      "data_type": "app_usage",
+      "temporal_granularity": "daily",
+      "unit": "entropy_bits",
+      "expected_range": [0, 10],
+      "missing_data_strategy": "zero_imputation"
+    },
+    "activity_timing_variance": {
+      "construct": "behavioral_activation",
+      "data_type": "accelerometer",
+      "temporal_granularity": "weekly",
+      "unit": "hours_squared",
+      "expected_range": [0, null],
+      "missing_data_strategy": "minimum_days"
+    },
+    "home_confinement": {
+      "construct": "avoidance",
+      "data_type": "gps",
+      "temporal_granularity": "daily",
+      "unit": "percentage",
+      "expected_range": [0, 1],
+      "missing_data_strategy": "threshold_based"
+    },
+    "communication_gaps": {
+      "construct": "avoidance",
+      "data_type": "communication",
+      "temporal_granularity": "daily",
+      "unit": "hours",
+      "expected_range": [0, 24],
+      "missing_data_strategy": "maximum_gap"
+    },
+    "movement_radius": {
+      "construct": "avoidance",
+      "data_type": "gps",
+      "temporal_granularity": "weekly",
+      "unit": "meters",
+      "expected_range": [0, null],
+      "missing_data_strategy": "threshold_based"
+    },
+    "communication_frequency": {
+      "construct": "social_engagement",
+      "data_type": "communication",
+      "temporal_granularity": "daily",
+      "unit": "count",
+      "expected_range": [0, null],
+      "missing_data_strategy": "zero_imputation"
+    },
+    "contact_diversity": {
+      "construct": "social_engagement",
+      "data_type": "communication",
+      "temporal_granularity": "weekly",
+      "unit": "count",
+      "expected_range": [0, null],
+      "missing_data_strategy": "minimum_days"
+    },
+    "initiation_rate": {
+      "construct": "social_engagement",
+      "data_type": "communication",
+      "temporal_granularity": "daily",
+      "unit": "ratio",
+      "expected_range": [0, 1],
+      "missing_data_strategy": "zero_denominator_handling"
+    },
+    "sleep_onset_consistency": {
+      "construct": "routine_stability",
+      "data_type": "screen_state",
+      "temporal_granularity": "weekly",
+      "unit": "hours",
+      "expected_range": [0, "unbounded"],
+      "range_note": "Theoretical maximum >12 hours in pathological cases",
+      "missing_data_strategy": "minimum_nights"
+    },
+    "sleep_duration": {
+      "construct": "routine_stability",
+      "data_type": "screen_state",
+      "temporal_granularity": "daily",
+      "unit": "hours",
+      "expected_range": [2, 12],
+      "missing_data_strategy": "minimum_duration"
+    },
+    "activity_fragmentation": {
+      "construct": "routine_stability",
+      "data_type": "accelerometer",
+      "temporal_granularity": "daily",
+      "unit": "entropy_bits",
+      "expected_range": [0, 10],
+      "missing_data_strategy": "coverage_threshold"
+    },
+    "circadian_midpoint": {
+      "construct": "routine_stability",
+      "data_type": "screen_state",
+      "temporal_granularity": "daily",
+      "unit": "hours",
+      "expected_range": [0, 24],
+      "missing_data_strategy": "minimum_duration"
+    }
+  },
+  "aggregation_methods": {
+    "mean": {
+      "description": "Simple arithmetic mean of feature values",
+      "formula": "mean(x)",
+      "requirements": ["numeric_values"]
+    },
+    "inverse_mean": {
+      "description": "Stabilized directional inverse for features where lower values indicate higher construct",
+      "formula": "directional_scale(x, direction='negative')",
+      "requirements": ["numeric_values", "stabilized_transformation"]
+    },
+    "inverse_sd": {
+      "description": "Stabilized directional inverse for consistency measures (deprecated - use directional_reverse)",
+      "formula": "directional_scale(x, direction='positive')",
+      "requirements": ["numeric_values", "stabilized_transformation"]
+    },
+    "inverse_entropy": {
+      "description": "Stabilized directional inverse for stability measures where lower entropy = higher stability",
+      "formula": "directional_scale(x, direction='negative')",
+      "requirements": ["numeric_values", "stabilized_transformation"]
+    },
+    "circular_sd": {
+      "description": "Circular standard deviation for time-based features using proper circular statistics",
+      "formula": "sqrt(-2 * ln(R)) where R = sqrt((Σcosθ)^2 + (Σsinθ)^2) / n, θ = (hour/24) * 2π",
+      "requirements": ["time_values", "circular_statistics", "radian_conversion"]
+    },
+    "directional_inverse": {
+      "description": "Directional scaling with stabilization for negative-direction features",
+      "formula": "standardize(-x) with epsilon stabilization",
+      "requirements": ["numeric_values", "direction_specified"]
+    },
+    "directional_reverse": {
+      "description": "Directional reversal for positive-direction consistency features",
+      "formula": "standardize(max(x) - x) for consistency measures",
+      "requirements": ["numeric_values", "consistency_measure"]
+    }
+  },
+  "validation_status": {
+    "theoretical": {
+      "description": "Based on theoretical grounding, not yet empirically validated",
+      "confidence_level": "low",
+      "requires_validation": true
+    },
+    "experimental": {
+      "description": "Preliminary experimental evidence, needs further validation",
+      "confidence_level": "medium",
+      "requires_validation": true
+    },
+    "literature_supported": {
+      "description": "Supported by existing literature but this specific implementation needs validation",
+      "confidence_level": "medium",
+      "requires_validation": true
+    },
+    "validated": {
+      "description": "Empirically validated in multiple peer-reviewed studies",
+      "confidence_level": "high",
+      "requires_validation": false
+    }
+  },
+  "registry_metadata": {
+    "version": "1.1.0",
+    "created_date": "2026-02-21",
+    "last_updated": "2026-02-22",
+    "created_by": "Psyconstruct Development Team",
+    "alignment": "PRD Section 9 - Construct Registry",
+    "implementation_scope": {
+      "measurement_models": "Descriptive only - not yet operationalized in aggregation logic",
+      "directionality": "Explicitly encoded via 'direction' field",
+      "aggregation_linearity": "Linear aggregation assumed for v1 implementation"
+    },
+    "theoretical_basis": {
+      "behavioral_activation": "Behavioral Activation Theory, Lewinsohn (1974)",
+      "avoidance": "Two-Process Theory of Avoidance, Mowrer (1947); Modern Avoidance Models, Barlow (2000)",
+      "social_engagement": "Social Engagement Framework, Cohen (2004)",
+      "routine_stability": "Circadian Rhythm Theory, Aschoff (1965)"
+    },
+    "measurement_references": {
+      "reflective": "Classical Test Theory, Lord & Novick (1968)",
+      "formative": "Formative Measurement Theory, Bollen & Lennox (1991)"
+    }
+  }
+}
