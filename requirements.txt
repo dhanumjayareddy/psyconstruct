@@ -1,0 +1,154 @@
+# Psyconstruct - Digital Phenotyping for Mental Health
+# Core dependencies for digital phenotyping and psychological construct analysis
+
+# === CORE DEPENDENCIES ===
+
+# Data manipulation and analysis
+pandas>=1.5.0              # Data structures and analysis tools
+numpy>=1.21.0               # Numerical computing and array operations
+
+# Date and time handling
+python-dateutil>=2.8.0      # Powerful date/time utilities
+
+# Mathematical and statistical functions
+scipy>=1.9.0                 # Scientific computing and statistical functions
+
+# === DATA PROCESSING ===
+
+# Geospatial analysis
+geopy>=2.2.0                 # Geocoding and distance calculations
+haversine>=2.7.0             # Great-circle distance calculations
+
+# Signal processing for accelerometer data
+scikit-learn>=1.1.0          # Machine learning and signal processing
+
+# === STATISTICAL ANALYSIS ===
+
+# Advanced statistical functions
+statsmodels>=0.13.0          # Statistical models and tests
+
+# Entropy and information theory calculations
+scipy>=1.9.0                 # Shannon entropy calculations (included in scipy)
+
+# === DATA VALIDATION ===
+
+# Data validation and serialization
+pydantic>=1.10.0             # Data validation using Python type annotations
+jsonschema>=4.0.0            # JSON schema validation
+
+# === CONFIGURATION MANAGEMENT ===
+
+# Configuration file handling
+pyyaml>=6.0                  # YAML configuration file support
+toml>=0.10.2                 # TOML configuration file support
+
+# === LOGGING AND MONITORING ===
+
+# Enhanced logging
+structlog>=22.1.0             # Structured logging for better debugging
+
+# Progress tracking
+tqdm>=4.64.0                 # Progress bars for long-running operations
+
+# === TESTING FRAMEWORK ===
+
+# Unit testing
+pytest>=7.0.0                # Testing framework
+pytest-cov>=3.0.0             # Coverage reporting
+pytest-mock>=3.8.0            # Mocking support
+
+# Code quality and formatting
+black>=22.0.0                 # Code formatting
+isort>=5.10.0                 # Import sorting
+flake8>=4.0.0                 # Linting
+mypy>=0.971                   # Static type checking
+
+# === DOCUMENTATION ===
+
+# Documentation generation (optional)
+sphinx>=4.5.0                 # Documentation generation
+sphinx-rtd-theme>=1.0.0       # ReadTheDocs theme
+
+# === DEVELOPMENT TOOLS ===
+
+# Jupyter notebook support
+jupyter>=1.0.0                # Interactive development environment
+ipykernel>=6.15.0             # Jupyter kernel for Python
+
+# Performance profiling
+memory-profiler>=0.60.0       # Memory usage profiling
+line-profiler>=3.5.0          # Line-by-line profiling
+
+# === OPTIONAL ENHANCEMENTS ===
+
+# Advanced geospatial analysis (optional)
+# shapely>=1.8.0               # Geometric object manipulation
+# geopandas>=0.11.0            # Geospatial pandas extension
+
+# Machine learning extensions (optional)
+# xgboost>=1.6.0               # Gradient boosting
+# lightgbm>=3.3.0              # Light gradient boosting
+
+# Database support (optional)
+# sqlalchemy>=1.4.0             # Database ORM
+# psycopg2-binary>=2.9.0       # PostgreSQL adapter
+# pymongo>=4.2.0                # MongoDB adapter
+
+# Cloud storage (optional)
+# boto3>=1.24.0                 # AWS SDK
+# google-cloud-storage>=2.5.0   # Google Cloud Storage
+
+# === VERSION SPECIFICATIONS ===
+
+# Minimum Python version: 3.8
+# Recommended Python version: 3.9 or 3.10
+
+# === PLATFORM COMPATIBILITY ===
+
+# Tested on:
+# - Windows 10/11
+# - macOS 10.15+
+# - Linux (Ubuntu 18.04+, CentOS 7+)
+
+# === SECURITY NOTES ===
+
+# All dependencies are regularly scanned for vulnerabilities
+# Use pip-audit to check for known security issues:
+# pip install pip-audit
+# pip-audit
+
+# === INSTALLATION COMMANDS ===
+
+# Install core dependencies:
+# pip install -r requirements.txt
+
+# Install with development tools:
+# pip install -r requirements.txt
+# pip install -e .[dev]
+
+# Install with optional enhancements:
+# pip install -r requirements.txt
+# pip install -e .[dev,optional]
+
+# === PINNED VERSIONS FOR PRODUCTION ===
+
+# For production deployments, consider using pinned versions:
+# pip freeze > requirements-frozen.txt
+
+# === DEPENDENCY ANALYSIS ===
+
+# Core tree (direct dependencies):
+# - pandas, numpy, scipy, python-dateutil
+# - geopy, haversine, scikit-learn
+# - pydantic, jsonschema, pyyaml, toml
+# - structlog, tqdm
+
+# Development tree (for development and testing):
+# - pytest, pytest-cov, pytest-mock
+# - black, isort, flake8, mypy
+# - sphinx, jupyter, memory-profiler, line-profiler
+
+# Optional tree (enhanced functionality):
+# - shapely, geopandas, xgboost, lightgbm
+# - sqlalchemy, psycopg2-binary, pymongo
+# - boto3, google-cloud-storage
