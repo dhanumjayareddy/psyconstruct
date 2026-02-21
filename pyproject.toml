@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "psyconstruct"
 version = "1.0.0"
 description = "Digital phenotyping framework for mental health research and clinical practice"
-readme = "README_main.md"
+readme = "README.md"
 license = {text = "MIT"}
 authors = [
     {name = "Psyconstruct Development Team", email = "psyconstruct@example.com"}
