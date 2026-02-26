@@ -4,7 +4,7 @@ authors:
 - family-names: Bhavanam
   given-names: Dhanumjaya Reddy
   orcid: "https://orcid.org/0009-0008-0678-8261"
-title: "Psyconstruct: A reproducible framework for theory-informed digital phenotyping research"
+title: "Psyconstruct: A reproducible framework for digital phenotyping research"
 version: 1.0.0
 date-released: 2026-02-26
 url: "https://github.com/dhanumjayareddybhavanam/psyconstruct"
