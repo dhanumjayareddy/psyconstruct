@@ -292,10 +292,10 @@ validation_status:
 
 # Version and provenance
 registry_metadata:
-  version: "1.1.0"
-  created_date: "2026-02-21"
-  last_updated: "2026-02-22"
-  created_by: "Psyconstruct Development Team"
+  version: "1.0.0"
+  created_date: "2026-02-26"
+  last_updated: "2026-02-26"
+  created_by: "Dhanumjaya Reddy Bhavanam"
   alignment: "PRD Section 9 - Construct Registry"
   
   # Implementation notes
