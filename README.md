@@ -1,36 +1,85 @@
-# Psyconstruct: Digital Phenotyping for Mental Health
+# Psyconstruct: A Reproducible Framework for Theory-Informed Digital Phenotyping Research
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://github.com/your-repo/psyconstruct/docs)
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://github.com/dhanumjayareddybhavanam/psyconstruct/docs)
 
-A comprehensive Python framework for digital phenotyping in mental health research and clinical practice. Psyconstruct transforms raw sensor and usage data into validated psychological construct scores using evidence-based feature extraction and aggregation methods.
+## 🎯 Statement of Need
+
+Digital phenotyping research faces a critical reproducibility gap: while frameworks like Beiwe, RADAR-base, and mindLAMP provide data collection infrastructure, they lack standardized, theoretically-grounded methods for transforming raw sensor data into psychological construct scores. Researchers must implement custom feature extraction and aggregation pipelines, leading to inconsistent methodologies and irreproducible results across studies.
+
+Psyconstruct addresses this gap by providing a **reproducible, open-source framework** that provides an explicit computational operationalization of selected psychological theories into standardized digital behavioral indicators. Unlike existing platforms that focus on data collection, Psyconstruct provides the **methodological bridge** between raw smartphone sensor data and theoretically meaningful construct scores, enabling consistent digital phenotyping research across laboratories.
+
+> Psyconstruct is intended for research use and does not provide clinical decision support.
+
+---
+
+
+### Comparison with Existing Software
+
+Psyconstruct differs from existing digital phenotyping platforms in several key ways:
+
+* **Data Processing Focus**: Unlike Beiwe, RADAR-base, and mindLAMP which primarily focus on data collection, Psyconstruct provides standardized methods for transforming raw sensor data into theoretically-grounded construct scores.
+
+* **Theory-Mapped Registry**: Provides an explicit computational operationalization of psychological theories through a structured registry system that maps features to constructs.
+
+* **Reproducibility Guarantees**: Explicit deterministic algorithms with provenance tracking and version-locked methods ensure reproducible research across laboratories.
+
+* **Separation of Concerns**: Clear architectural separation between feature extraction, construct aggregation, and quality assessment enables modular research workflows.
+
+* **Research-Only Design**: Intentionally designed as research methodology infrastructure rather than clinical deployment tools.
+
+---
 
 ## 🎯 Overview
 
-Psyconstruct implements a complete digital phenotyping pipeline that extracts meaningful behavioral patterns from smartphone sensor data and aggregates them into clinically validated psychological constructs. The system is designed for researchers and clinicians working with digital biomarkers for mental health assessment, monitoring, and intervention.
+Psyconstruct implements a complete digital phenotyping pipeline that extracts meaningful behavioral patterns from smartphone sensor data and aggregates them into theoretically grounded psychological constructs. The system is designed for researchers working with digital behavioral indicators, providing standardized methods for reproducible digital phenotyping studies.
+
+> In v1.0.0, reflective and formative distinctions are documented in the registry but operationalized using linear weighted aggregation.
 
 ### Key Features
 
-- **🧠 Four Validated Psychological Constructs**
+- **🧠 Four Theoretically Grounded Psychological Constructs**
   - Behavioral Activation (BA) - 4 features
   - Avoidance (AV) - 3 features  
   - Social Engagement (SE) - 3 features
   - Routine Stability (RS) - 4 features
 
-- **📊 14 Digital Phenotyping Features**
+- **📊 14 Digital Behavioral Indicators**
   - Activity volume, location diversity, app usage breadth, timing variance
   - Home confinement, communication gaps, movement radius
   - Communication frequency, contact diversity, initiation rate
   - Sleep onset consistency, sleep duration, activity fragmentation, circadian midpoint
 
-- **🔬 Production-Grade Implementation**
+- **🔬 Research-Grade Implementation**
   - Comprehensive provenance tracking
   - Quality assessment metrics
   - Configurable parameters
   - Robust error handling
   - Extensive unit tests
-  - Clinical interpretation
+  - Interpretive summaries based on theoretical directionality
+
+### Validation Status
+
+**Feature validation varies by construct:**
+- **Theoretical**: Features based on established psychological theory
+- **Experimental**: Features with preliminary empirical support
+- **Placeholder**: Features requiring further validation
+
+**Note:** This is a research methodology framework. All constructs require empirical validation in specific research contexts before interpretation.
+
+## 🎯 Scope
+
+Psyconstruct provides:
+- Feature extraction from smartphone sensor data
+- Registry-based construct aggregation
+- Deterministic normalization and weighting
+
+Psyconstruct does NOT provide:
+- Clinical diagnosis
+- Latent variable modeling
+- Machine learning pipelines
+- Causal inference tools
 
 ## 🚀 Quick Start
 
@@ -38,7 +87,7 @@ Psyconstruct implements a complete digital phenotyping pipeline that extracts me
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/psyconstruct.git
+git clone https://github.com/dhanumjayareddybhavanam/psyconstruct.git
 cd psyconstruct
 
 # Install dependencies
@@ -153,7 +202,7 @@ psyconstruct/
 - **App Usage Breadth**: Entropy of app category usage patterns
 - **Activity Timing Variance**: Variance in activity timing across days
 
-**Clinical Interpretation**:
+**Interpretive Notes (Theoretical Directionality)**:
 - High scores: Active, engaged, goal-directed behavior
 - Low scores: Withdrawal, anhedonia, reduced motivation
 
@@ -166,7 +215,7 @@ psyconstruct/
 - **Communication Gaps**: Maximum duration without outgoing communication per day
 - **Movement Radius**: Radius of gyration representing spatial movement extent
 
-**Clinical Interpretation**:
+**Interpretive Notes (Theoretical Directionality)**:
 - High scores: Withdrawal, isolation, avoidance behaviors
 - Low scores: Engagement, exploration, approach behaviors
 
@@ -179,7 +228,7 @@ psyconstruct/
 - **Contact Diversity**: Number of unique contacts in rolling 7-day windows
 - **Initiation Rate**: Ratio of outgoing to total communications
 
-**Clinical Interpretation**:
+**Interpretive Notes (Theoretical Directionality)**:
 - High scores: Socially active, diverse network, proactive engagement
 - Low scores: Social withdrawal, limited network, passive communication
 
@@ -193,7 +242,7 @@ psyconstruct/
 - **Activity Fragmentation**: Entropy of hourly activity distribution
 - **Circadian Midpoint**: Midpoint between sleep onset and wake times
 
-**Clinical Interpretation**:
+**Interpretive Notes (Theoretical Directionality)**:
 - High scores: Consistent routines, stable circadian rhythms
 - Low scores: Irregular patterns, circadian disruption, chaos
 
@@ -359,7 +408,7 @@ score = aggregator.aggregate_construct(
 
 print(f"BA Score: {score.normalized_score:.2f}")
 print(f"Interpretation: {score.interpretation}")
-print(f"95% CI: {score.confidence_interval}")
+print(f"Dispersion Interval: {score.dispersion_interval}")  # Note: Represents dispersion, not inferential CI
 ```
 
 #### All Constructs
@@ -519,13 +568,12 @@ class AggregationConfig:
 ```python
 from psyconstruct.features import *
 from psyconstruct.constructs import ConstructAggregator
-import pandas as pd
 
 def analyze_participant(gps_data, accelerometer_data, communication_data, 
                        screen_data, app_usage_data, participant_id):
     """Complete analysis pipeline for a single participant."""
     
-    # Initialize all feature extractors
+    # Initialize feature extractors
     ba_features = BehavioralActivationFeatures()
     avoidance_features = AvoidanceFeatures()
     se_features = SocialEngagementFeatures()
@@ -533,115 +581,41 @@ def analyze_participant(gps_data, accelerometer_data, communication_data,
     
     # Extract all features
     feature_results = {}
-    
-    # Behavioral Activation
     feature_results['activity_volume'] = ba_features.activity_volume(accelerometer_data)
-    feature_results['location_diversity'] = ba_features.location_diversity(gps_data)
-    feature_results['app_usage_breadth'] = ba_features.app_usage_breadth(app_usage_data)
-    feature_results['activity_timing_variance'] = ba_features.activity_timing_variance(accelerometer_data)
-    
-    # Avoidance
     feature_results['home_confinement'] = avoidance_features.home_confinement(gps_data)
-    feature_results['communication_gaps'] = avoidance_features.communication_gaps(communication_data)
-    feature_results['movement_radius'] = avoidance_features.movement_radius(gps_data)
-    
-    # Social Engagement
     feature_results['communication_frequency'] = se_features.communication_frequency(communication_data)
-    feature_results['contact_diversity'] = se_features.contact_diversity(communication_data)
-    feature_results['initiation_rate'] = se_features.initiation_rate(communication_data)
-    
-    # Routine Stability
     feature_results['sleep_onset_consistency'] = rs_features.sleep_onset_consistency(screen_data)
-    feature_results['sleep_duration'] = rs_features.sleep_duration(screen_data)
-    feature_results['activity_fragmentation'] = rs_features.activity_fragmentation(accelerometer_data)
-    feature_results['circadian_midpoint'] = rs_features.circadian_midpoint(screen_data)
     
     # Aggregate into construct scores
     aggregator = ConstructAggregator()
     construct_scores = aggregator.aggregate_all_constructs(
-        feature_results, 
-        participant_id=participant_id
+        feature_results, participant_id=participant_id
     )
     
     return construct_scores, feature_results
 
-# Usage
+# Display results
 construct_scores, feature_results = analyze_participant(
     gps_data, accelerometer_data, communication_data, 
     screen_data, app_usage_data, "participant_001"
 )
 
-# Display results
 print("Construct Scores:")
 for construct, score in construct_scores.items():
     print(f"  {construct}: {score.normalized_score:.2f} - {score.interpretation}")
 ```
 
-### Clinical Risk Assessment
-
-```python
-def assess_clinical_risk(construct_scores):
-    """Assess clinical risk based on construct scores."""
-    
-    risks = []
-    
-    # Behavioral Activation
-    ba_score = construct_scores['behavioral_activation'].normalized_score
-    if ba_score < -0.5:
-        risks.append("Significant reduction in behavioral activation")
-    elif ba_score < -0.2:
-        risks.append("Mild reduction in behavioral activation")
-    
-    # Avoidance
-    avoidance_score = construct_scores['avoidance'].normalized_score
-    if avoidance_score > 0.5:
-        risks.append("High avoidance behaviors detected")
-    elif avoidance_score > 0.2:
-        risks.append("Moderate avoidance behaviors")
-    
-    # Social Engagement
-    se_score = construct_scores['social_engagement'].normalized_score
-    if se_score < -0.5:
-        risks.append("Social withdrawal patterns")
-    elif se_score < -0.2:
-        risks.append("Reduced social engagement")
-    
-    # Routine Stability
-    rs_score = construct_scores['routine_stability'].normalized_score
-    if rs_score < -0.5:
-        risks.append("Significant routine disruption")
-    elif rs_score < -0.2:
-        risks.append("Mild routine instability")
-    
-    # Overall risk assessment
-    if len(risks) >= 3:
-        risk_level = "HIGH"
-    elif len(risks) >= 1:
-        risk_level = "MODERATE"
-    else:
-        risk_level = "LOW"
-    
-    return risk_level, risks
-
-# Usage
-risk_level, risks = assess_clinical_risk(construct_scores)
-print(f"Risk Level: {risk_level}")
-print("Identified Risks:")
-for risk in risks:
-    print(f"  - {risk}")
-```
-
 ### Longitudinal Monitoring
 
 ```python
+import pandas as pd
+
 def longitudinal_analysis(participant_data_history):
     """Analyze changes in construct scores over time."""
     
     results = []
-    
     for timestamp, data in participant_data_history.items():
         construct_scores, _ = analyze_participant(**data, participant_id=f"participant_{timestamp}")
-        
         results.append({
             'timestamp': timestamp,
             'behavioral_activation': construct_scores['behavioral_activation'].normalized_score,
@@ -650,34 +624,51 @@ def longitudinal_analysis(participant_data_history):
             'routine_stability': construct_scores['routine_stability'].normalized_score
         })
     
-    # Convert to DataFrame for analysis
     df = pd.DataFrame(results)
     df['timestamp'] = pd.to_datetime(df['timestamp'])
-    df = df.sort_values('timestamp')
-    
-    # Calculate trends
-    trends = {}
-    for construct in ['behavioral_activation', 'avoidance', 'social_engagement', 'routine_stability']:
-        # Simple linear trend
-        x = np.arange(len(df))
-        y = df[construct].values
-        slope = np.polyfit(x, y, 1)[0]
-        trends[construct] = slope
-    
-    return df, trends
-
-# Usage
-history = {
-    '2026-01-01': {'gps_data': gps1, 'accelerometer_data': accel1, ...},
-    '2026-01-08': {'gps_data': gps2, 'accelerometer_data': accel2, ...},
-    '2026-01-15': {'gps_data': gps3, 'accelerometer_data': accel3, ...}
-}
-
-df, trends = longitudinal_analysis(history)
-print("Trends (slope per week):")
-for construct, slope in trends.items():
-    print(f"  {construct}: {slope:.3f}")
+    return df.sort_values('timestamp')
 ```
+
+## 📊 Statistical Assumptions & Limitations
+
+### Key Statistical Assumptions
+
+The aggregation methods in Psyconstruct make the following statistical assumptions:
+
+- **Linear Additivity**: Features contribute linearly to construct scores
+- **Feature Independence**: No adjustment for multicollinearity between features
+- **No Latent Structure**: Constructs are treated as weighted composites, not latent variables
+- **Equal Weighting**: Current weights are theoretical placeholders, not empirically derived
+
+### Known Limitations
+
+- **Single-Participant Reliability**: Reliability estimation requires multi-participant data for item covariances
+- **Dispersion vs Confidence Intervals**: Intervals represent dispersion, not statistical confidence intervals
+- **Measurement Models**: In v1.0, reflective vs formative distinctions are documented but not yet statistically modeled - all constructs use linear weighted aggregation
+- **Validation Status**: Features have varying validation levels (theoretical vs experimental)
+- **Feature Weights**: Current weights are theory-driven placeholders and not empirically optimized
+
+### Future Improvements
+
+- Multi-participant reliability estimation
+- Multicollinearity assessment and adjustment
+- True latent variable modeling
+- Empirically-derived feature weights
+
+### Reproducibility Guarantee
+
+Psyconstruct is **deterministic** given identical input data and configuration. The framework guarantees:
+
+- **Identical inputs → identical outputs**
+- **Version-locked algorithms** with documented changes
+- **Algorithm version stored in provenance metadata**
+- **Provenance tracking** for full audit trails
+- **No stochastic processes** in core calculations
+- **Registry version coupling** for construct definitions
+
+This ensures reproducible research results across computing environments and time periods.
+
+---
 
 ## 🔒 Quality Assurance
 
@@ -716,95 +707,13 @@ provenance_record = {
 
 The system has been validated with:
 
-- **Unit Test Coverage**: >95% code coverage
+- **Unit Test Coverage**: Comprehensive test suite with edge case coverage
 - **Integration Tests**: End-to-end pipeline validation
-- **Clinical Validation**: Comparison with clinical assessments
+- **Preliminary Validation**: Internal testing with simulated datasets. No published empirical validation study accompanies v1.0.
 - **Performance Testing**: Scalability to large datasets
 - **Quality Assurance**: Automated quality checks
 
-## 🏥 Clinical Applications
-
-### Depression Monitoring
-
-```python
-def depression_risk_assessment(construct_scores):
-    """Assess depression risk based on digital phenotyping."""
-    
-    ba = construct_scores['behavioral_activation'].normalized_score
-    se = construct_scores['social_engagement'].normalized_score
-    rs = construct_scores['routine_stability'].normalized_score
-    
-    # Depression risk algorithm
-    depression_score = (-ba * 0.4) + (-se * 0.3) + (-rs * 0.3)
-    
-    if depression_score > 0.7:
-        return "HIGH_RISK", "Severe depressive symptoms likely"
-    elif depression_score > 0.3:
-        return "MODERATE_RISK", "Mild to moderate depressive symptoms"
-    else:
-        return "LOW_RISK", "Minimal depressive symptoms"
-```
-
-### Anxiety Detection
-
-```python
-def anxiety_pattern_analysis(construct_scores):
-    """Analyze patterns associated with anxiety."""
-    
-    avoidance = construct_scores['avoidance'].normalized_score
-    rs = construct_scores['routine_stability'].normalized_score
-    
-    # Anxiety often shows high avoidance + routine disruption
-    anxiety_indicator = (avoidance * 0.6) + (-rs * 0.4)
-    
-    patterns = []
-    if avoidance > 0.5:
-        patterns.append("Avoidance behaviors")
-    if rs < -0.3:
-        patterns.append("Routine disruption")
-    
-    return anxiety_indicator, patterns
-```
-
-### Treatment Response Monitoring
-
-```python
-def treatment_response(baseline_scores, current_scores, weeks_treatment):
-    """Monitor treatment response over time."""
-    
-    changes = {}
-    for construct in baseline_scores:
-        baseline = baseline_scores[construct].normalized_score
-        current = current_scores[construct].normalized_score
-        change = current - baseline
-        changes[construct] = change
-    
-    # Calculate overall improvement
-    improvement_score = sum(changes.values()) / len(changes)
-    
-    # Rate of change per week
-    weekly_change = improvement_score / weeks_treatment
-    
-    return {
-        'overall_improvement': improvement_score,
-        'weekly_change': weekly_change,
-        'construct_changes': changes,
-        'response_category': categorize_response(improvement_score)
-    }
-
-def categorize_response(improvement_score):
-    """Categorize treatment response."""
-    if improvement_score > 0.5:
-        return "SIGNIFICANT_IMPROVEMENT"
-    elif improvement_score > 0.2:
-        return "MODERATE_IMPROVEMENT"
-    elif improvement_score > -0.2:
-        return "STABLE"
-    else:
-        return "DECLINING"
-```
-
-## 🔬 Research Applications
+## 🏥 Research Applications
 
 ### Population Studies
 
@@ -838,75 +747,6 @@ def population_analysis(participant_data):
     return population_stats, df
 ```
 
-### Predictive Modeling
-
-```python
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score
-
-def predict_clinical_outcomes(feature_data, clinical_labels):
-    """Predict clinical outcomes from digital phenotyping data."""
-    
-    # Prepare features
-    X = []
-    y = []
-    
-    for participant_id, (features, label) in feature_data.items():
-        # Extract construct scores
-        construct_scores, _ = analyze_participant(**features, participant_id=participant_id)
-        
-        feature_vector = [
-            construct_scores['behavioral_activation'].normalized_score,
-            construct_scores['avoidance'].normalized_score,
-            construct_scores['social_engagement'].normalized_score,
-            construct_scores['routine_stability'].normalized_score
-        ]
-        
-        X.append(feature_vector)
-        y.append(clinical_labels[participant_id])
-    
-    # Train model
-    model = RandomForestClassifier(n_estimators=100, random_state=42)
-    scores = cross_val_score(model, X, y, cv=5, scoring='accuracy')
-    
-    print(f"Cross-validation accuracy: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
-    
-    return model, scores
-```
-
-### Validation Studies
-
-```python
-def validate_constructs(digital_data, clinical_assessments):
-    """Validate digital constructs against clinical assessments."""
-    
-    validation_results = {}
-    
-    for construct in ['behavioral_activation', 'avoidance', 'social_engagement', 'routine_stability']:
-        digital_scores = []
-        clinical_scores = []
-        
-        for participant_id in digital_data:
-            # Extract digital score
-            construct_scores, _ = analyze_participant(**digital_data[participant_id], 
-                                                      participant_id=participant_id)
-            digital_scores.append(construct_scores[construct].normalized_score)
-            
-            # Get corresponding clinical score
-            clinical_scores.append(clinical_assessments[participant_id][construct])
-        
-        # Calculate correlation
-        correlation = np.corrcoef(digital_scores, clinical_scores)[0, 1]
-        
-        validation_results[construct] = {
-            'correlation': correlation,
-            'p_value': calculate_p_value(digital_scores, clinical_scores),
-            'n_participants': len(digital_scores)
-        }
-    
-    return validation_results
-```
-
 ## 🧪 Testing
 
 ### Running Tests
@@ -932,7 +772,7 @@ The test suite includes:
 - **Quality Tests**: Data quality and validation testing
 - **Performance Tests**: Scalability and efficiency testing
 
-Current coverage: **>95%**
+Current coverage: **Comprehensive unit and integration test suite**
 
 ### Example Test
 
@@ -956,6 +796,18 @@ def test_behavioral_activation_activity_volume():
     assert result['weekly_activity_count'] > 0
 ```
 
+## 📚 Theoretical Foundations
+
+Psyconstruct operationalizes established psychological theories into digital behavioral indicators:
+
+- **Behavioral Activation Theory** (Lewinsohn, 1974)
+- **Avoidance Learning Theory** (Mowrer, 1947)  
+- **Social Engagement Theory** (House, 1981)
+- **Circadian Rhythm Theory** (Aschoff, 1965)
+- **Measurement Theory** (Lord & Novick, 1968; Bollen & Lennox, 1991)
+
+---
+
 ## 🤝 Contributing
 
 We welcome contributions to Psyconstruct! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
@@ -964,7 +816,7 @@ We welcome contributions to Psyconstruct! Please see our [Contributing Guideline
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/psyconstruct.git
+git clone https://github.com/dhanumjayareddybhavanam/psyconstruct.git
 cd psyconstruct
 
 # Create virtual environment
@@ -1022,9 +874,9 @@ If you use Psyconstruct in your research, please cite:
 ```bibtex
 @software{psyconstruct2024,
   title={Psyconstruct: Digital Phenotyping for Mental Health},
-  author={Your Name},
+  author={Dhanumjaya Reddy Bhavanam},
   year={2024},
-  url={https://github.com/your-repo/psyconstruct}
+  url={https://github.com/dhanumjayareddybhavanam/psyconstruct}
 }
 ```
 
@@ -1037,28 +889,18 @@ If you use Psyconstruct in your research, please cite:
 
 ## 📞 Support
 
-- **Documentation**: [Full documentation](https://psyconstruct.readthedocs.io/)
-- **Issues**: [GitHub Issues](https://github.com/your-repo/psyconstruct/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-repo/psyconstruct/discussions)
-- **Email**: psyconstruct-support@example.com
+- **Documentation**: [Full documentation](https://github.com/dhanumjayareddybhavanam/psyconstruct/docs)
+- **Issues**: [GitHub Issues](https://github.com/dhanumjayareddybhavanam/psyconstruct/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/dhanumjayareddybhavanam/psyconstruct/discussions)
+- **Email**: dhanumjayareddybhavanam@gmail.com
 
-## 🗺️ Roadmap
+## 🗺️ Development Roadmap
 
-### Upcoming Features
+- [ ] Multi-participant reliability estimation
+- [ ] Advanced statistical validation frameworks
+- [ ] Cross-dataset harmonization standards
+- [ ] Extended construct library
 
-- [ ] Real-time processing capabilities
-- [ ] Mobile app integration
-- [ ] Advanced machine learning models
-- [ ] Clinical decision support tools
-- [ ] Multi-site data harmonization
+## Version
 
-### Version History
-
-- **v1.0.0**: Initial release with 4 constructs and 14 features
-- **v1.1.0**: Enhanced quality metrics and validation
-- **v1.2.0**: Advanced normalization methods
-- **v1.3.0**: Clinical interpretation tools
-
----
-
-**Psyconstruct**: Transforming digital data into mental health insights 🧠💚
+**v1.0.0** – Initial public research release

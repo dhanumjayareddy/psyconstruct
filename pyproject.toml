@@ -5,44 +5,35 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "psyconstruct"
 version = "1.0.0"
-description = "Digital phenotyping framework for mental health research and clinical practice"
+description = "A reproducible framework for theory-informed digital phenotyping research"
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Psyconstruct Development Team", email = "psyconstruct@example.com"}
+    {name = "Dhanumjaya Reddy Bhavanam", email = "dhanumjayareddybhavanam@gmail.com"}
 ]
 maintainers = [
-    {name = "Psyconstruct Development Team", email = "psyconstruct@example.com"}
+    {name = "Dhanumjaya Reddy Bhavanam", email = "dhanumjayareddybhavanam@gmail.com"}
 ]
 keywords = [
     "digital phenotyping",
-    "mental health",
+    "psychological measurement",
     "behavioral analysis",
-    "psychological constructs",
+    "computational social science",
     "mobile sensing",
     "smartphone data",
-    "clinical research",
-    "machine learning",
+    "research methodology",
     "data science",
-    "healthcare",
-    "depression",
-    "anxiety",
     "behavioral activation",
     "avoidance",
     "social engagement",
     "routine stability"
 ]
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "Intended Audience :: Healthcare Industry",
     "Intended Audience :: Science/Research",
-    "Intended Audience :: Information Technology",
-    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Topic :: Scientific/Engineering :: Information Analysis",
     "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: Scientific/Engineering :: Artificial Intelligence",
-    "Topic :: Health Care",
-    "Topic :: Software Development :: Libraries",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
@@ -52,7 +43,6 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Operating System :: OS Independent",
     "Environment :: Console",
-    "Environment :: Other Environment",
     "Natural Language :: English",
     "Typing :: Typed",
 ]
@@ -186,19 +176,15 @@ security = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/your-repo/psyconstruct"
+Homepage = "https://github.com/dhanumjayareddybhavanam/psyconstruct"
 Documentation = "https://psyconstruct.readthedocs.io/"
-Repository = "https://github.com/your-repo/psyconstruct"
-"Bug Tracker" = "https://github.com/your-repo/psyconstruct/issues"
-Changelog = "https://github.com/your-repo/psyconstruct/blob/main/CHANGELOG.md"
+Repository = "https://github.com/dhanumjayareddybhavanam/psyconstruct"
+"Bug Tracker" = "https://github.com/dhanumjayareddybhavanam/psyconstruct/issues"
+Changelog = "https://github.com/dhanumjayareddybhavanam/psyconstruct/blob/main/CHANGELOG.md"
 
-[project.scripts]
-psyconstruct = "psyconstruct.cli:main"
-psyconstruct-validate = "psyconstruct.validation:main"
-psyconstruct-analyze = "psyconstruct.analysis:main"
 
 [tool.setuptools]
-packages = ["psyconstruct", "psyconstruct.features", "psyconstruct.constructs", "psyconstruct.tests", "psyconstruct.utils"]
+packages = ["psyconstruct", "psyconstruct.features", "psyconstruct.constructs", "psyconstruct.utils", "psyconstruct.preprocessing"]
 
 [tool.setuptools.package-data]
 psyconstruct = [
@@ -210,7 +196,7 @@ psyconstruct = [
 ]
 
 [tool.setuptools.exclude-package-data]
-"*" = ["tests/*"]
+psyconstruct = ["tests/*", "setup.py"]
 
 # Black configuration
 [tool.black]

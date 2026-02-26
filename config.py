@@ -368,6 +368,6 @@ def get_config(config_path: Optional[str] = None) -> PsyconstructConfig:
     if config_path is None:
         return DEFAULT_CONFIG
     
-    # TODO: Implement loading from file
+    # Load configuration from file (future implementation)
     # For now, return default configuration
     return DEFAULT_CONFIG

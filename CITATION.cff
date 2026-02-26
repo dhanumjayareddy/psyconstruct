@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: Psyconstruct
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Dhanumjaya Reddy
+    family-names: Bhavanam
+    orcid: 0000-0000-0000-0000
+title: Psyconstruct: A reproducible framework for theory-informed digital phenotyping research
+version: 1.0.0
+date-released: 2026-02-26
+url: https://github.com/dhanumjayareddybhavanam/psyconstruct
+repository-code: https://github.com/dhanumjayareddybhavanam/psyconstruct
+license: MIT
+abstract: >-
+  Psyconstruct provides a reproducible, open-source framework for transforming 
+  raw smartphone sensor data into theoretically-grounded psychological construct 
+  scores through a registry-based architecture that ensures consistent digital 
+  phenotyping research across laboratories.

@@ -57,7 +57,7 @@ class ConstructScore:
     aggregation_parameters: Dict[str, Any]
     timestamp: datetime
     participant_id: Optional[str] = None
-    confidence_interval: Optional[Tuple[float, float]] = None
+    dispersion_interval: Optional[Tuple[float, float]] = None
     interpretation: Optional[str] = None
 
 
@@ -209,8 +209,8 @@ class ConstructAggregator:
                 feature_qualities, high_quality_features
             )
             
-            # Calculate confidence interval
-            confidence_interval = self._calculate_confidence_interval(
+            # Calculate dispersion interval
+            dispersion_interval = self._calculate_dispersion_interval(
                 normalized_features, feature_weights
             )
             
@@ -238,7 +238,7 @@ class ConstructAggregator:
                 aggregation_parameters=aggregation_parameters,
                 timestamp=datetime.now(),
                 participant_id=participant_id,
-                confidence_interval=confidence_interval,
+                dispersion_interval=dispersion_interval,
                 interpretation=interpretation
             )
             
@@ -267,7 +267,7 @@ class ConstructAggregator:
                     result_summary={
                         'raw_score': raw_score,
                         'normalized_score': normalized_score,
-                        'confidence_interval': confidence_interval
+                        'dispersion_interval': dispersion_interval
                     },
                     data_quality_metrics=quality_metrics,
                     algorithm_version="1.0.0"
@@ -711,8 +711,9 @@ class ConstructAggregator:
         """
         Calculate construct-level reliability estimates.
         
-        For reflective constructs: Cronbach's alpha
-        For formative constructs: Composite reliability (if correlation data available)
+        NOTE: True reliability estimation requires multi-participant data to calculate
+        item covariances and inter-item correlations. This single-participant
+        implementation cannot compute psychometrically valid reliability coefficients.
         
         Args:
             construct_name: Name of the construct
@@ -720,7 +721,7 @@ class ConstructAggregator:
             construct_def: Construct definition with measurement model
             
         Returns:
-            Dictionary with reliability estimates
+            Dictionary with reliability estimation limitations noted
         """
         measurement_model = construct_def.measurement_model.lower()
         features = list(feature_values.keys())
@@ -734,61 +735,32 @@ class ConstructAggregator:
                 'message': 'Need at least 2 features for reliability estimation'
             }
         
-        if measurement_model == "reflective":
-            return self._calculate_cronbachs_alpha(construct_name, feature_values, construct_def)
-        elif measurement_model == "formative":
-            return self._calculate_composite_reliability(construct_name, feature_values, construct_def)
-        else:
-            return {
-                'cronbachs_alpha': None,
-                'composite_reliability': None,
-                'measurement_model': measurement_model,
-                'reliability_type': 'unknown_model',
-                'message': f'Unknown measurement model: {measurement_model}'
-            }
+        # Return limitation notice for all reliability calculations
+        return {
+            'cronbachs_alpha': None,
+            'composite_reliability': None,
+            'measurement_model': measurement_model,
+            'reliability_type': 'not_computable',
+            'message': 'Reliability estimation requires multi-participant data for item covariances. Single-participant reliability not psychometrically valid.'
+        }
     
     def _calculate_cronbachs_alpha(self,
                                   construct_name: str,
                                   feature_values: Dict[str, float],
                                   construct_def) -> Dict[str, float]:
         """
-        Calculate Cronbach's alpha for reflective constructs.
+        Placeholder for Cronbach's alpha calculation.
         
-        Note: This is a simplified implementation. True Cronbach's alpha requires
-        multiple observations/participants to calculate item covariances.
-        This implementation provides an estimate based on feature weights and
-        quality metrics.
+        NOTE: This method is disabled because Cronbach's alpha requires
+        multi-participant data to calculate item covariances. Single-participant
+        reliability estimation is not psychometrically valid.
+        
+        This method is retained for API compatibility but returns None.
         """
-        features = list(feature_values.keys())
-        k = len(features)  # Number of items
-        
-        if k < 2:
-            return {'cronbachs_alpha': None, 'reliability_type': 'insufficient_items'}
-        
-        # Get feature weights and quality estimates
-        weights = [construct_def.get_feature(f).weight for f in features]
-        qualities = [0.8] * k  # Assume good quality for estimation
-        
-        # Estimate item correlations based on weight similarity
-        # Higher weight similarity suggests higher correlation
-        weight_variance = statistics.variance(weights) if len(weights) > 1 else 0
-        estimated_correlation = max(0.1, 1.0 - weight_variance)  # Minimum 0.1 correlation
-        
-        # Simplified Cronbach's alpha formula
-        # α = (k * r̄) / (1 + (k-1) * r̄) where r̄ is average inter-item correlation
-        cronbachs_alpha = (k * estimated_correlation) / (1 + (k - 1) * estimated_correlation)
-        
-        # Adjust for quality
-        quality_adjusted_alpha = cronbachs_alpha * statistics.mean(qualities)
-        
         return {
-            'cronbachs_alpha': cronbachs_alpha,
-            'quality_adjusted_alpha': quality_adjusted_alpha,
-            'estimated_correlation': estimated_correlation,
-            'item_count': k,
-            'reliability_type': 'cronbachs_alpha',
-            'measurement_model': 'reflective',
-            'interpretation': self._interpret_reliability(cronbachs_alpha)
+            'cronbachs_alpha': None,
+            'reliability_type': 'not_computable',
+            'message': 'Cronbach\'s alpha requires multi-participant covariance data. Not available for single-participant estimation.'
         }
     
     def _calculate_composite_reliability(self,
@@ -796,34 +768,19 @@ class ConstructAggregator:
                                        feature_values: Dict[str, float],
                                        construct_def) -> Dict[str, float]:
         """
-        Calculate composite reliability for formative constructs.
+        Placeholder for composite reliability calculation.
         
-        Note: True composite reliability requires indicator loadings from
-        confirmatory factor analysis. This provides an estimate based on
-        weights and quality metrics.
+        NOTE: This method is disabled because composite reliability requires
+        indicator loadings from confirmatory factor analysis or multi-participant
+        correlation data. Single-participant reliability estimation is not
+        psychometrically valid.
+        
+        This method is retained for API compatibility but returns None.
         """
-        features = list(feature_values.keys())
-        weights = [construct_def.get_feature(f).weight for f in features]
-        qualities = [0.8] * len(features)  # Assume good quality
-        
-        # Simplified composite reliability calculation
-        # CR = (Σwi)² / [(Σwi)² + Σ(1 - reliability_i)]
-        sum_weights = sum(weights)
-        sum_error_variance = sum(1 - q for q in qualities)
-        
-        if sum_weights > 0:
-            composite_reliability = (sum_weights ** 2) / ((sum_weights ** 2) + sum_error_variance)
-        else:
-            composite_reliability = 0.0
-        
         return {
-            'composite_reliability': composite_reliability,
-            'sum_weights': sum_weights,
-            'error_variance': sum_error_variance,
-            'indicator_count': len(features),
-            'reliability_type': 'composite_reliability',
-            'measurement_model': 'formative',
-            'interpretation': self._interpret_reliability(composite_reliability)
+            'composite_reliability': None,
+            'reliability_type': 'not_computable',
+            'message': 'Composite reliability requires indicator loadings from CFA or multi-participant data. Not available for single-participant estimation.'
         }
     
     def _interpret_reliability(self, reliability: float) -> str:
@@ -899,11 +856,11 @@ class ConstructAggregator:
         circular_sd = math.sqrt(-2 * math.log(R))
         return circular_sd
     
-    def _calculate_confidence_interval(self,
+    def _calculate_dispersion_interval(self,
                                       normalized_features: Dict[str, float],
                                       feature_weights: Dict[str, float]) -> Optional[Tuple[float, float]]:
         """
-        Calculate weighted standard deviation of indicators.
+        Calculate weighted standard deviation of indicators as dispersion measure.
         
         NOTE: This is NOT a confidence interval. Indicators are not independent
         observations, so standard statistical CI formulas are invalid.
@@ -1042,7 +999,7 @@ class ConstructAggregator:
                 'aggregation_parameters': score.aggregation_parameters,
                 'timestamp': score.timestamp.isoformat(),
                 'participant_id': score.participant_id,
-                'confidence_interval': score.confidence_interval,
+                'dispersion_interval': score.dispersion_interval,
                 'interpretation': score.interpretation
             }
         
