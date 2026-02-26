@@ -4,6 +4,6 @@ authors:
 - family-names: "Bhavanam"
   given-names: "Dhanumjaya Reddy"
   orcid: "https://orcid.org/0009-0008-0678-8261"
-title: "Psyconstruct: A reproducible framework for digital phenotyping research"
+title: "Psyconstruct"
 version: "v1.0.0"
 date-released: "2026-02-26"
