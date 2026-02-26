@@ -883,12 +883,7 @@ If you use Psyconstruct in your research, please cite:
 }
 ```
 
-## 🙏 Acknowledgments
 
-- Clinical collaborators for validation and feedback
-- Research participants for data contribution
-- Open source community for tools and libraries
-- Funding agencies for support
 
 ## 📞 Support
 
