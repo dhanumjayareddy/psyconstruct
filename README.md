@@ -3,6 +3,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://github.com/dhanumjayareddybhavanam/psyconstruct/docs)
+[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.18792047-blue.svg)](https://doi.org/10.5281/zenodo.18792047)
 
 ## 🎯 Statement of Need
 
@@ -872,11 +873,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 If you use Psyconstruct in your research, please cite:
 
 ```bibtex
-@software{psyconstruct2024,
-  title={Psyconstruct: Digital Phenotyping for Mental Health},
-  author={Dhanumjaya Reddy Bhavanam},
-  year={2024},
-  url={https://github.com/dhanumjayareddybhavanam/psyconstruct}
+@software{bhavanam2026psyconstruct,
+  title={Psyconstruct: A reproducible framework for theory-informed digital phenotyping research},
+  author={Bhavanam, Dhanumjaya Reddy},
+  year={2026},
+  publisher={Zenodo},
+  doi={10.5281/zenodo.18792047},
+  url={https://doi.org/10.5281/zenodo.18792047}
 }
 ```
 

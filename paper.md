@@ -27,6 +27,8 @@ Psyconstruct is implemented in Python and designed for integration into research
 
 Source code is available at: https://github.com/dhanumjayareddybhavanam/psyconstruct
 
+DOI: 10.5281/zenodo.18792047
+
 # Statement of Need
 
 The rapid growth of digital phenotyping has created a methodological crisis: researchers collect massive amounts of sensor data but lack standardized methods to transform these data into theoretically meaningful psychological constructs [@torous2019]. Existing platforms focus primarily on data collection rather than measurement, forcing research teams to develop custom pipelines that are rarely shared or validated [@marquez2019].
