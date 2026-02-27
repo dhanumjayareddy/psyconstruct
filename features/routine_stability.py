@@ -771,6 +771,10 @@ class RoutineStabilityFeatures:
     
     def _validate_screen_data(self, data: Dict[str, Any]) -> None:
         """Validate screen data format and content."""
+        # Handle case where data might be passed incorrectly
+        if not isinstance(data, dict):
+            raise ValueError(f"Expected dictionary for screen data, got {type(data).__name__}")
+            
         required_columns = ['timestamp', 'screen_state']
         
         for col in required_columns:
@@ -793,6 +797,10 @@ class RoutineStabilityFeatures:
     
     def _validate_activity_data(self, data: Dict[str, Any]) -> None:
         """Validate activity data format and content."""
+        # Handle case where data might be passed incorrectly
+        if not isinstance(data, dict):
+            raise ValueError(f"Expected dictionary for activity data, got {type(data).__name__}")
+            
         required_columns = ['timestamp', 'activity_level']
         
         for col in required_columns:

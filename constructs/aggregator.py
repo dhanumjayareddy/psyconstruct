@@ -306,7 +306,7 @@ class ConstructAggregator:
         """
         construct_scores = {}
         
-        for construct_name in self.construct_registry["constructs"]:
+        for construct_name in self.construct_registry.constructs:
             try:
                 construct_reference = None
                 if reference_data and construct_name in reference_data:
@@ -320,9 +320,7 @@ class ConstructAggregator:
             except ValueError as e:
                 # Log failed aggregation but continue with others
                 if self.provenance_tracker:
-                    self.provenance_tracker.log_warning(
-                        f"Failed to aggregate {construct_name}: {str(e)}"
-                    )
+                    print(f"Warning: Failed to aggregate {construct_name}: {str(e)}")
                 continue
         
         return construct_scores

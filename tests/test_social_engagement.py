@@ -388,7 +388,7 @@ class TestContactDiversity:
         
         # Create data with some contacts having few interactions
         comm_data = {
-            'timestamp': [datetime(2026, 2, 21, 12 + i, 0, 0) for i in range(15)],
+            'timestamp': [datetime(2026, 2, 21, 8 + i, 0, 0) for i in range(15)],
             'direction': ['outgoing'] * 15,
             'contact': ['contact_1'] * 5 + ['contact_2'] * 3 + ['contact_3'] * 7  # contact_2 has only 3
         }
@@ -460,18 +460,20 @@ class TestContactDiversity:
         
         # Create stable diversity (same contacts each day)
         stable_data = {
-            'timestamp': [datetime(2026, 2, 21 + i, 12, 0, 0) for i in range(5)],
-            'direction': ['outgoing'] * 5,
-            'contact': ['contact_1', 'contact_2', 'contact_1', 'contact_2', 'contact_1']
+            'timestamp': [datetime(2026, 2, 15 + i, 12, 0, 0) for i in range(10)],
+            'direction': ['outgoing'] * 10,
+            'contact': ['contact_1', 'contact_2', 'contact_1', 'contact_2', 'contact_1', 
+                       'contact_1', 'contact_2', 'contact_1', 'contact_2', 'contact_1']
         }
         
         stable_result = features.contact_diversity(stable_data)
         
         # Create variable diversity (different contacts each day)
         variable_data = {
-            'timestamp': [datetime(2026, 2, 21 + i, 12, 0, 0) for i in range(5)],
-            'direction': ['outgoing'] * 5,
-            'contact': ['contact_1', 'contact_2', 'contact_3', 'contact_4', 'contact_5']
+            'timestamp': [datetime(2026, 2, 15 + i, 12, 0, 0) for i in range(10)],
+            'direction': ['outgoing'] * 10,
+            'contact': ['contact_1', 'contact_2', 'contact_3', 'contact_4', 'contact_5',
+                       'contact_6', 'contact_7', 'contact_8', 'contact_9', 'contact_10']
         }
         
         variable_result = features.contact_diversity(variable_data)

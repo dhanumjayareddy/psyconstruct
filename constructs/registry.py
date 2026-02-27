@@ -305,8 +305,8 @@ class ConstructRegistry:
         """
         try:
             actual_construct = self.get_construct_for_feature(feature_name)
-            return actual_construct == construct_name
-        except KeyError:
+            return actual_construct.name == construct_name
+        except (KeyError, AttributeError):
             return False
     
     def get_feature_weights(self, construct_name: str) -> Dict[str, float]:

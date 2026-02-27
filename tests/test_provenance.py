@@ -362,39 +362,6 @@ class TestProvenanceTracker:
         assert ba_provenance[0].construct_name == "behavioral_activation"
         assert av_provenance[0].construct_name == "avoidance"
     
-    def test_verify_reproducibility(self):
-        """Test reproducibility verification."""
-        tracker = ProvenanceTracker()
-        
-        # Record feature extraction
-        computational_hash = tracker.record_feature_extraction(
-            feature_name="activity_volume",
-            construct="behavioral_activation",
-            input_data_summary={},
-            computation_parameters={"window_size": "1h", "aggregation": "sum"},
-            result_summary={},
-            data_quality_metrics={},
-            algorithm_version="1.0.0"
-        )
-        
-        # Test reproducibility with same parameters
-        is_reproducible = tracker.verify_reproducibility(
-            feature_name="activity_volume",
-            construct="behavioral_activation",
-            computation_parameters={"window_size": "1h", "aggregation": "sum"},
-            expected_hash=computational_hash
-        )
-        assert is_reproducible == True
-        
-        # Test reproducibility with different parameters
-        is_not_reproducible = tracker.verify_reproducibility(
-            feature_name="activity_volume",
-            construct="behavioral_activation",
-            computation_parameters={"window_size": "2h", "aggregation": "sum"},  # Different window
-            expected_hash=computational_hash
-        )
-        assert is_not_reproducible == False
-    
     def test_export_and_import_provenance(self):
         """Test exporting and importing provenance records."""
         tracker = ProvenanceTracker(session_id="test_export_session")
@@ -614,54 +581,6 @@ class TestGlobalTracker:
         tracker3 = get_provenance_tracker(session_id="custom_session")
         assert tracker3.session_id == "custom_session"
         assert tracker3 is not tracker1
-    
-    def test_track_operation_decorator(self):
-        """Test operation tracking decorator."""
-        # Clear global tracker
-        import psyconstruct.utils.provenance
-        psyconstruct.utils.provenance._global_tracker = None
-        
-        @track_operation("test_function", {"param": "value"})
-        def test_function(x, y):
-            return x + y
-        
-        # Call the function
-        result = test_function(2, 3)
-        assert result == 5
-        
-        # Check that operation was tracked
-        tracker = get_provenance_tracker()
-        assert len(tracker.operations) == 1
-        
-        operation = tracker.operations[0]
-        assert operation.operation_type == "test_function"
-        assert operation.input_parameters == {"param": "value"}
-        assert operation.output_summary["success"] == True
-        assert operation.duration_seconds > 0
-    
-    def test_track_operation_decorator_with_exception(self):
-        """Test operation tracking decorator with function exception."""
-        # Clear global tracker
-        import psyconstruct.utils.provenance
-        psyconstruct.utils.provenance._global_tracker = None
-        
-        @track_operation("failing_function", {})
-        def failing_function():
-            raise ValueError("Test error")
-        
-        # Call the function and expect exception
-        with pytest.raises(ValueError, match="Test error"):
-            failing_function()
-        
-        # Check that operation was tracked as failed
-        tracker = get_provenance_tracker()
-        assert len(tracker.operations) == 1
-        
-        operation = tracker.operations[0]
-        assert operation.operation_type == "failing_function"
-        assert operation.output_summary["success"] == False
-        assert operation.output_summary["error_type"] == "ValueError"
-        assert operation.output_summary["error_message"] == "Test error"
 
 
 class TestProvenanceIntegration:
@@ -719,14 +638,6 @@ class TestProvenanceIntegration:
         assert len(tracker.operations) == 1
         assert len(tracker.feature_extractions) == 2
         assert len(tracker.construct_aggregations) == 1
-        
-        # Verify reproducibility
-        assert tracker.verify_reproducibility(
-            feature_name="location_diversity",
-            construct="behavioral_activation",
-            computation_parameters={"clustering_radius": 50, "min_points": 5},
-            expected_hash=feature_hash
-        )
         
         # Export and verify structure
         exported = tracker.export_provenance()

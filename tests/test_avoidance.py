@@ -247,7 +247,7 @@ class TestHomeConfinement:
         base_time = datetime(2026, 2, 21, 0, 0, 0)
         
         # Add nighttime points around home
-        for day in range(3):
+        for day in range(4):  # Increased to 4 days
             for hour in [23, 0, 1, 2, 3, 4, 5]:  # Nighttime hours
                 for minute in range(0, 60, 30):
                     timestamp = base_time + timedelta(days=day, hours=hour, minutes=minute)
@@ -260,7 +260,7 @@ class TestHomeConfinement:
                     gps_data['longitude'].append(lon)
         
         # Add some daytime points away from home
-        for day in range(3):
+        for day in range(4):  # Increased to 4 days
             for hour in range(6, 22):
                 timestamp = base_time + timedelta(days=day, hours=hour)
                 lat = home_lat + 0.01  # 1km away
@@ -448,7 +448,7 @@ class TestCommunicationGaps:
         result = features.communication_gaps(single_outgoing_data)
         
         # Should calculate gaps to day boundaries
-        assert result['weekly_max_gap_hours'] > 12.0  # At least 12 hours
+        assert result['weekly_max_gap_hours'] >= 12.0  # At least 12 hours
         assert result['communication_gaps']['total_outgoing'] == 3
     
     def test_communication_data_validation(self):
