@@ -13,7 +13,7 @@ This package implements 14 theory-grounded features across four constructs:
 Purpose: Research reproducibility and transparent feature extraction
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "Dhanumjaya Reddy Bhavanam"
 __email__ = "dhanumjayareddybhavanam@gmail.com"
 
