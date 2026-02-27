@@ -151,7 +151,7 @@ class TestConstructRegistry:
                 }
             },
             'registry_metadata': {
-                'version': '1.0.0',
+                'version': '1.0.1',
                 'created_date': '2026-02-21'
             }
         }
@@ -215,7 +215,7 @@ class TestConstructRegistry:
             },
             'aggregation_methods': {'mean': {'description': 'Mean', 'formula': 'mean(x)', 'requirements': ['numeric']}},
             'validation_status': {'theoretical': {'description': 'Theoretical', 'confidence_level': 'low', 'requires_validation': True}},
-            'registry_metadata': {'version': '1.0.0'}
+            'registry_metadata': {'version': '1.0.1'}
         }
         
         registry_file = self.create_test_registry_file(registry_data)
@@ -252,7 +252,7 @@ class TestConstructRegistry:
             },
             'aggregation_methods': {'mean': {'description': 'Mean', 'formula': 'mean(x)', 'requirements': ['numeric']}},
             'validation_status': {'theoretical': {'description': 'Theoretical', 'confidence_level': 'low', 'requires_validation': True}},
-            'registry_metadata': {'version': '1.0.0'}
+            'registry_metadata': {'version': '1.0.1'}
         }
         
         registry_file = self.create_test_registry_file(registry_data)
@@ -413,7 +413,7 @@ class TestGetRegistry:
             },
             'aggregation_methods': {'mean': {'description': 'Mean', 'formula': 'mean(x)', 'requirements': ['numeric']}},
             'validation_status': {'theoretical': {'description': 'Theoretical', 'confidence_level': 'low', 'requires_validation': True}},
-            'registry_metadata': {'version': '1.0.0'}
+            'registry_metadata': {'version': '1.0.1'}
         }
         
         with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f:

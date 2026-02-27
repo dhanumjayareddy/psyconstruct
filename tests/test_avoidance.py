@@ -614,10 +614,10 @@ class TestMovementRadius:
         
         result = features.movement_radius(single_location_data)
         
-        # Should have zero radius
+        # Should have zero radius (allow for floating point precision)
         assert result['weekly_radius_meters'] == 0.0
-        assert result['movement_radius']['max_distance_meters'] == 0.0
-        assert result['movement_radius']['mean_distance_meters'] == 0.0
+        assert result['movement_radius']['max_distance_meters'] < 1e-6
+        assert result['movement_radius']['mean_distance_meters'] < 1e-6
     
     def test_movement_radius_outlier_removal(self):
         """Test movement radius with outlier removal."""

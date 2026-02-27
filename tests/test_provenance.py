@@ -73,7 +73,7 @@ class TestFeatureExtractionProvenance:
             computation_parameters={"window_size": "1h"},
             result_summary={"mean_value": 45.2},
             data_quality_metrics={"completeness": 0.95},
-            algorithm_version="1.0.0",
+            algorithm_version="1.0.1",
             computational_hash="abc123"
         )
         
@@ -93,7 +93,7 @@ class TestFeatureExtractionProvenance:
                 computation_parameters={},
                 result_summary={},
                 data_quality_metrics={},
-                algorithm_version="1.0.0",
+                algorithm_version="1.0.1",
                 computational_hash="abc123"
             )
         
@@ -107,7 +107,7 @@ class TestFeatureExtractionProvenance:
                 computation_parameters={},
                 result_summary={},
                 data_quality_metrics={},
-                algorithm_version="1.0.0",
+                algorithm_version="1.0.1",
                 computational_hash="abc123"
             )
 
@@ -239,7 +239,7 @@ class TestProvenanceTracker:
             computation_parameters={"window_size": "1h", "aggregation": "sum"},
             result_summary={"mean_value": 45.2, "std_value": 12.3},
             data_quality_metrics={"completeness": 0.95, "missing_rate": 0.05},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         assert computational_hash is not None
@@ -251,7 +251,7 @@ class TestProvenanceTracker:
         assert provenance.feature_name == "activity_volume"
         assert provenance.construct == "behavioral_activation"
         assert provenance.computational_hash == computational_hash
-        assert provenance.algorithm_version == "1.0.0"
+        assert provenance.algorithm_version == "1.0.1"
     
     def test_record_construct_aggregation(self):
         """Test recording construct aggregation provenance."""
@@ -290,7 +290,7 @@ class TestProvenanceTracker:
             computation_parameters={},
             result_summary={},
             data_quality_metrics={},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         tracker.record_feature_extraction(
@@ -300,7 +300,7 @@ class TestProvenanceTracker:
             computation_parameters={},
             result_summary={},
             data_quality_metrics={},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         tracker.record_feature_extraction(
@@ -310,7 +310,7 @@ class TestProvenanceTracker:
             computation_parameters={},
             result_summary={},
             data_quality_metrics={},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         # Get provenance for specific feature
@@ -377,7 +377,7 @@ class TestProvenanceTracker:
             computation_parameters={},
             result_summary={},
             data_quality_metrics={},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         # Export provenance
@@ -454,7 +454,7 @@ class TestProvenanceTracker:
             computation_parameters={},
             result_summary={},
             data_quality_metrics={},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         assert len(tracker.operations) == 1
@@ -485,7 +485,7 @@ class TestProvenanceTracker:
             computation_parameters={},
             result_summary={},
             data_quality_metrics={},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         tracker.record_feature_extraction(
@@ -495,7 +495,7 @@ class TestProvenanceTracker:
             computation_parameters={},
             result_summary={},
             data_quality_metrics={},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         tracker.record_construct_aggregation(
@@ -530,7 +530,7 @@ class TestProvenanceTracker:
             computation_parameters={"window": "1h"},
             result_summary={"mean": 45.0},
             data_quality_metrics={"completeness": 0.95},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         hash2 = tracker.record_feature_extraction(
@@ -540,7 +540,7 @@ class TestProvenanceTracker:
             computation_parameters={"window": "1h"},
             result_summary={"mean": 45.0},
             data_quality_metrics={"completeness": 0.95},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         # Hashes should be identical for identical inputs
@@ -554,7 +554,7 @@ class TestProvenanceTracker:
             computation_parameters={"window": "2h"},  # Different window
             result_summary={"mean": 45.0},
             data_quality_metrics={"completeness": 0.95},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         assert hash3 != hash1
@@ -609,7 +609,7 @@ class TestProvenanceIntegration:
             computation_parameters={"clustering_radius": 50, "min_points": 5},
             result_summary={"entropy_value": 2.34, "unique_locations": 15},
             data_quality_metrics={"completeness": 0.92, "coverage_ratio": 0.88},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         # Step 3: Another feature extraction
@@ -620,7 +620,7 @@ class TestProvenanceIntegration:
             computation_parameters={"window_size": "1h", "aggregation": "sum"},
             result_summary={"mean_activity": 45.2, "peak_activity": 89.1},
             data_quality_metrics={"completeness": 0.95, "sampling_rate": 1.0},
-            algorithm_version="1.0.0"
+            algorithm_version="1.0.1"
         )
         
         # Step 4: Construct aggregation

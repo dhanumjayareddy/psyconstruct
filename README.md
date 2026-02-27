@@ -36,7 +36,7 @@ Psyconstruct differs from existing digital phenotyping platforms in several key 
 
 Psyconstruct implements a complete digital phenotyping pipeline that extracts meaningful behavioral patterns from smartphone sensor data and aggregates them into theoretically grounded psychological constructs. The system is designed for researchers working with digital behavioral indicators, providing standardized methods for reproducible digital phenotyping studies.
 
-> In v1.0.0, reflective and formative distinctions are documented in the registry but operationalized using linear weighted aggregation.
+> In v1.0.1, reflective and formative distinctions are documented in the registry but operationalized using linear weighted aggregation.
 
 ### Key Features
 
@@ -901,4 +901,4 @@ If you use Psyconstruct in your research, please cite:
 
 ## Version
 
-**v1.0.0** – Initial public research release
+**v1.0.1** – Initial public research release

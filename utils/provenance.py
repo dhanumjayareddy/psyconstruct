@@ -198,7 +198,7 @@ class ProvenanceTracker:
                                  computation_parameters: Dict[str, Any],
                                  result_summary: Dict[str, Any],
                                  data_quality_metrics: Dict[str, Any],
-                                 algorithm_version: str = '1.0.0') -> str:
+                                 algorithm_version: str = '1.0.1') -> str:
         """
         Record provenance for feature extraction.
         
@@ -369,7 +369,7 @@ class ProvenanceTracker:
             'feature_name': feature_name,
             'construct': construct,
             'parameters': computation_parameters,
-            'algorithm_version': '1.0.0'  # Should match the original
+            'algorithm_version': '1.0.1'  # Should match the original
         }
         current_hash = self._generate_hash(hash_input)
         
