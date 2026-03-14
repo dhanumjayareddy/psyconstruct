@@ -25,7 +25,7 @@ Psyconstruct addresses this gap by providing a reproducible, open-source framewo
 
 Psyconstruct is implemented in Python and designed for integration into research data pipelines.
 
-Source code is available at: https://github.com/dhanumjayareddybhavanam/psyconstruct
+Source code is available at: https://github.com/dhanumjayareddy/psyconstruct
 
 DOI: 10.5281/zenodo.19023161
 
