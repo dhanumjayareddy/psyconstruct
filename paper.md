@@ -27,7 +27,7 @@ Psyconstruct is implemented in Python and designed for integration into research
 
 Source code is available at: https://github.com/dhanumjayareddybhavanam/psyconstruct
 
-DOI: 10.5281/zenodo.18792047
+DOI: 10.5281/zenodo.19023161
 
 # Statement of Need
 

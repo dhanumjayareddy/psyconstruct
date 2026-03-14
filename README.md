@@ -3,7 +3,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://github.com/dhanumjayareddybhavanam/psyconstruct/docs)
-[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.18792047-blue.svg)](https://doi.org/10.5281/zenodo.18792047)
+[![DOI](https://img.shields.io/badge/DOI-10.5281/zenodo.19023161-blue.svg)](https://doi.org/10.5281/zenodo.19023161)
 
 ## 🎯 Statement of Need
 
@@ -878,8 +878,8 @@ If you use Psyconstruct in your research, please cite:
   author={Bhavanam, Dhanumjaya Reddy},
   year={2026},
   publisher={Zenodo},
-  doi={10.5281/zenodo.18792047},
-  url={https://doi.org/10.5281/zenodo.18792047}
+  doi={10.5281/zenodo.19023161},
+  url={https://doi.org/10.5281/zenodo.19023161}
 }
 ```
 
