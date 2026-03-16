@@ -11,7 +11,7 @@ authors:
     orcid: 0009-0008-0678-8261
     affiliation: 1
 affiliations:
-  - name: Independent Researcher
+  - name: Indian Institute of Technology Delhi
     index: 1
 date: 26 February 2026
 bibliography: paper.bib
@@ -182,12 +182,12 @@ print(f"Social Engagement: {construct_scores['social_engagement'].normalized_sco
 
 | Feature | Beiwe | RADAR-base | mindLAMP | Psyconstruct |
 |---------|-------|------------|----------|--------------|
-| Data Collection | ✓ | ✓ | ✓ | Not primary focus |
-| Feature Extraction | Not primary focus | Limited | Not primary focus | ✓ |
-| Theory Mapping | Not primary focus | Not primary focus | Not primary focus | ✓ |
-| Construct Aggregation | Not primary focus | Not primary focus | Not primary focus | ✓ |
-| Registry-Based Design | Not primary focus | Not primary focus | Not primary focus | ✓ |
-| Open Source | ✓ | ✓ | ✓ | ✓ |
+| Data Collection | Supported | Supported | Supported | Not primary focus |
+| Feature Extraction | Not primary focus | Limited | Not primary focus | Supported |
+| Theory Mapping | Not primary focus | Not primary focus | Not primary focus | Supported |
+| Construct Aggregation | Not primary focus | Not primary focus | Not primary focus | Supported |
+| Registry-Based Design | Not primary focus | Not primary focus | Not primary focus | Supported |
+| Open Source | Yes | Yes | Yes | Yes |
 
 # Impact
 
@@ -212,6 +212,8 @@ Psyconstruct has the potential to transform digital phenotyping from a collectio
 # Acknowledgements
 
 We thank the open-source community for foundational tools and libraries that made this work possible. We also acknowledge the researchers who have contributed to the theoretical foundations of digital phenotyping.
+
+I would like to extend special thanks to Aarat P Kalra for his constant support and encouragement. Although unaware of this specific project, his approach to problem-solving and way of doing things has been a source of inspiration, helping me comprehend complex concepts and maintain motivation throughout the development process. His indirect influence has been invaluable in shaping both the technical approach and the perseverance needed to complete this work.
 
 # AI Usage Disclosure
 
