@@ -42,6 +42,22 @@ This methodological gap leads to several critical problems:
 
 Psyconstruct provides a registry-based computational framework that operationalizes selected psychological constructs through explicit feature-to-construct mappings, deterministic aggregation methods, and comprehensive provenance tracking.
 
+# State of the Field
+
+Digital phenotyping has emerged as a promising approach for continuous mental health monitoring and behavioral assessment [@torous2019]. The field has evolved from simple activity tracking to sophisticated multi-modal sensing, yet standardization remains elusive.
+
+Current digital phenotyping frameworks can be categorized into three main approaches:
+
+1. **Data Collection Platforms**: Beiwe, RADAR-base, and mindLAMP provide robust infrastructure for smartphone sensor data collection but offer limited support for standardized feature extraction or construct operationalization.
+
+2. **Machine Learning Pipelines**: Frameworks like AWARE and openmHealth focus on flexible data processing but lack explicit theoretical grounding for psychological measurement.
+
+3. **Proprietary Solutions**: Commercial platforms often provide sophisticated analytics but operate as black boxes, preventing scientific scrutiny and reproducibility.
+
+The critical gap lies in bridging raw sensor data with theoretically meaningful psychological constructs. While the field has established the technical feasibility of continuous behavioral monitoring, it lacks standardized, reproducible methods for transforming these data into validated psychological measures [@marquez2019].
+
+Psyconstruct addresses this gap by introducing a registry-based architecture that explicitly operationalizes psychological theories into standardized digital behavioral indicators, providing the missing methodological link between data collection and psychological measurement.
+
 # Registry-Based Architecture
 
 Psyconstruct uses a structured registry that maps psychological theories to specific digital behavioral indicators:
@@ -83,6 +99,38 @@ Feature modules compute deterministic behavioral indicators from structured sens
 Construct aggregation is registry-driven. A YAML-based registry defines construct–feature mappings, weights, and directional transformations. Aggregation is performed via linear weighted combinations following normalization (z-score, min-max, or robust scaling).
 
 All operations are deterministic. Provenance metadata record algorithm version, parameters, and quality metrics. The project includes unit and integration tests to ensure deterministic behavior across environments.
+
+# Software Design
+
+Psyconstruct follows a modular, registry-based architecture designed for extensibility and reproducibility:
+
+## Core Components
+
+1. **Registry System**: YAML-based construct definitions that serve as the single source of truth for feature mappings, weights, and transformation rules. The registry version controls all computational methods.
+
+2. **Feature Extraction Layer**: Specialized modules for different sensor types (GPS, accelerometer, communication, screen state, app usage). Each feature extractor returns both the computed value and comprehensive quality metrics.
+
+3. **Construct Aggregation Engine**: Registry-driven aggregation that applies normalization, directional transformations, and weighted combination according to theoretically-grounded rules.
+
+4. **Quality Assessment Framework**: Multi-dimensional quality evaluation including data completeness, temporal coverage, and measurement reliability.
+
+## Design Principles
+
+- **Determinism**: All algorithms are fully deterministic with no stochastic processes
+- **Transparency**: Every computational step is documented and reproducible
+- **Extensibility**: New constructs and features can be added through registry updates
+- **Version Control**: All methods are versioned for full provenance tracking
+- **Modularity**: Components can be used independently or as an integrated pipeline
+
+## Data Flow
+
+1. Raw sensor data → Feature extraction (with quality assessment)
+2. Feature values + quality metrics → Normalization (z-score/min-max/robust)
+3. Normalized features → Directional transformations (if specified)
+4. Transformed features → Weighted aggregation → Construct scores
+5. All steps → Provenance metadata (algorithm versions, parameters, quality)
+
+The design ensures that every construct score can be traced back to specific sensor inputs with complete computational provenance.
 
 # Usage Example
 
@@ -145,9 +193,46 @@ print(f"Social Engagement: {construct_scores['social_engagement'].normalized_sco
 
 Psyconstruct enables reproducible digital phenotyping research by providing standardized measurement methods, explicit theoretical grounding for digital features, and transparent open-source algorithms with full documentation.
 
+# Research Impact Statement
+
+Psyconstruct addresses a critical methodological gap in digital phenotyping research by providing the first open-source framework that explicitly operationalizes psychological theories into standardized digital behavioral indicators. The software enables reproducible research across laboratories through deterministic algorithms, comprehensive provenance tracking, and a registry-based architecture that ensures consistent construct operationalization.
+
+The framework's impact extends beyond methodological standardization:
+
+1. **Scientific Reproducibility**: By providing version-controlled, deterministic algorithms, Psyconstruct enables exact replication of digital phenotyping studies across research groups.
+
+2. **Theoretical Integration**: The registry-based approach forces explicit mapping between digital features and psychological theories, reducing the common practice of data-driven feature selection without theoretical grounding.
+
+3. **Clinical Translation**: Standardized construct scores facilitate the development of clinical decision support tools and evidence-based digital interventions.
+
+4. **Educational Value**: The transparent architecture serves as a teaching tool for understanding the computational pipeline from raw sensor data to psychological measures.
+
+Psyconstruct has the potential to transform digital phenotyping from a collection of custom, irreproducible pipelines into a standardized scientific methodology with clear theoretical foundations and reproducible computational methods.
+
 # Acknowledgements
 
 We thank the open-source community for foundational tools and libraries that made this work possible. We also acknowledge the researchers who have contributed to the theoretical foundations of digital phenotyping.
+
+# AI Usage Disclosure
+
+This research was conducted with minimal assistance from artificial intelligence tools. AI was used solely for:
+
+1. **Code Documentation**: Improving code comments and docstring clarity
+2. **Grammar and Style**: Minor proofreading and formatting improvements to the manuscript
+3. **Debugging Assistance**: Identifying syntax errors and suggesting standard Python practices
+4. **Test Writing**: Windsurf SWE 1.5 fast models were used to assist with writing unit tests and integration tests for edge cases
+5. **Code Assistance**: Windsurf SWE 1.5 fast models provided coding assistance for implementing helper functions and utility code
+
+All scientific content, theoretical framework, methodological decisions, and core implementation were developed by the human author. No AI was used for:
+
+- Conceptual development of the framework
+- Design of the registry architecture
+- Selection of psychological theories and constructs
+- Implementation of core algorithms
+- Statistical analysis or validation
+- Writing of scientific content
+
+The author takes full responsibility for the scientific content, methodological choices, and implementation details presented in this work.
 
 # References
 
